@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.enp.lubig.dao.SmsDAO">
+
+	<!-- SMS 발송 -->
+	<insert id="sendSms" parameterType="java.util.Map" >
+		INSERT INTO
+			biz_msg (CMID, MSG_TYPE,  REQUEST_TIME, SEND_TIME, DEST_PHONE, SEND_PHONE, MSG_BODY)
+		VALUES
+			(date_format(now(),'%Y%m%d%H%i%s${cmId}'), 0, NOW(), NOW(), '${destPhone}', '${sendPhone}', '${smsMsg}')
+	</insert>
+
+</mapper>

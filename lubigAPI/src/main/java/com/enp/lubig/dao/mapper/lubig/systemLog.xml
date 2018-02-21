@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.enp.lubig.dao.SystemLogDAO">
+
+	<insert id="insertSystemLog" parameterType="SystemLogVO" >
+	INSERT INTO lbSystemLog
+		(ipaddr, userKey, requestParameter, requestBody, responseParameter, regdate, host)
+	VALUES ('${ipaddr}', '${userKey}', '${requestParameter}', '${requestBody}', '${responseParameter}', NOW(), '${host}')
+	</insert>
+	
+	<select id="selectSystemLog" parameterType="SystemLogVO" resultType="SystemLogVO">
+	SELECT * FROM
+		lbSystemLog
+	limit 10
+	</select>
+	
+	<update id="updateSystemLog" parameterType="SystemLogVO">
+	
+	</update>
+	
+	<delete id="deleteSystemLog" parameterType="SystemLogVO">
+	</delete>
+</mapper>

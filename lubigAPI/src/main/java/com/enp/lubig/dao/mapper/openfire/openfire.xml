@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.enp.lubig.dao.OpenFireDAO">
+
+	<insert id="insertUser" parameterType="java.util.Map">
+		INSERT INTO 
+			ofUser(
+				username
+				, storedKey
+				, serverKey
+				, salt
+				, iterations
+				, plainPassword
+				, encryptedPassword
+				, name
+				, email
+				, creationDate
+				, modificationDate
+				, phoneNumber
+			) VALUES (
+				'${userName}'
+				, '${storedKey}'
+				, '${serverKey}'
+				, '${salt}'
+				, '4096'
+				, ''
+				, '${encryptedPassword}'
+				, #{name}
+				, #{email}
+				, '${creationDate}'
+				, '${modificationDate}'
+				, '${phoneNumber}'
+			)
+	</insert>
+	
+	
+	<select id="selectOfUserUserkey" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+			username
+		FROM
+			ofUser 
+		WHERE
+			phoneNumber = '${phoneNumber}'
+		ORDER BY
+			modificationDate DESC limit 1
+	</select>
+	
+	<insert id="insertOpenFireVCard" parameterType="java.util.Map">
+		
+		INSERT INTO ofVCard (username, vcard) VALUES ('${userName}', '${vCard}')
+	</insert>
+
+	<select id="selectProperty" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+			propValue
+		FROM
+			ofProperty
+		WHERE
+			name = '${propName}'
+	</select>
+	
+</mapper>
