@@ -1,0 +1,88 @@
+/*package com.lubig.context.config;
+
+import org.apache.http.Header;
+import org.apache.http.HttpHeaders;
+import org.apache.http.HttpHost;
+import org.apache.http.client.config.RequestConfig.Builder;
+import org.apache.http.message.BasicHeader;
+import org.elasticsearch.client.RestClient;
+import org.elasticsearch.client.RestClientBuilder;
+import org.elasticsearch.client.RestHighLevelClient;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class ElasticsearchConfig {
+	@Value("${elastic.scheme}")
+	private String SERVER_ES_SCHEME;
+
+	@Value("${elastic.hostName}")
+	private String SERVER_ES_HOSTNAME;
+
+	@Value("${elastic.port}")
+	private int SERVER_ES_PORT;
+	
+	@Value("${elastic.transPort}")
+	private int SERVER_ES_TRANSPORT;
+	
+	@Value("${elastic.nodeName}")
+	private String SERVER_ES_NODENAME;
+
+	@Value("${elastic.clusterName}")
+	private String SERVER_ES_CLUSTERNAME;
+	
+	private RestHighLevelClient highClient;
+	private RestClient restClient;
+	
+	@Bean(name = "esHighClient", destroyMethod = "close")
+	public RestHighLevelClient getEsHighClient() throws Throwable {
+		 highClient = new RestHighLevelClient(getRestClientBuild());
+		return highClient;
+	}
+	
+	@Bean(name = "esClient", destroyMethod = "close")
+	public RestClient getEsClient() throws Throwable {
+		restClient = getRestClientBuild().build();
+		return restClient;
+	}
+
+	public void close() throws Throwable {
+		if(highClient != null) {
+			highClient.close();
+		}
+		if(restClient != null) {
+			restClient.close();
+		}
+	}
+	
+	public RestClientBuilder getRestClientBuild() throws Throwable {
+		RestClientBuilder rcb = RestClient.builder(
+		        new HttpHost(SERVER_ES_HOSTNAME, SERVER_ES_PORT, SERVER_ES_SCHEME))
+				.setDefaultHeaders(new Header[] {
+						new BasicHeader(HttpHeaders.CONTENT_TYPE, "application/json;charset=UTF-8") })
+				.setMaxRetryTimeoutMillis(5000);
+		
+		// 실패시
+		rcb.setFailureListener(new RestClient.FailureListener() {
+			@Override
+			public void onFailure(HttpHost host) {
+				
+			}
+		});
+		
+		// 
+		rcb.setRequestConfigCallback(new RestClientBuilder.RequestConfigCallback() {
+			
+			@Override
+			public Builder customizeRequestConfig(Builder requestConfigBuilder) {
+				requestConfigBuilder.setSocketTimeout(5000);
+				return requestConfigBuilder;
+			}
+		});
+		
+		
+		return rcb;
+	}
+}
+*/
